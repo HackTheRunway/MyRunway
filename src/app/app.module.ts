@@ -7,13 +7,15 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomepageComponent } from './homepage/homepage.component';
 import { WardrobecamComponent } from './wardrobecam/wardrobecam.component';
+import { MatchComponent } from './match/match.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     HomepageComponent,
-    WardrobecamComponent
+    WardrobecamComponent,
+    MatchComponent
   ],
   imports: [
     BrowserModule,
