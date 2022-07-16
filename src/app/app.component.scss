@@ -80,6 +80,7 @@ p {
         max-width: 50%;
         bottom: 2vh;
         right: 2vw;
+        max-height: 1080px;
     }
 
     .open {
@@ -142,5 +143,61 @@ p {
     }
     100% {
         opacity: 1;
+    }
+}
+
+.phone-view {
+    display: none;
+}
+
+@media screen and (max-width: 800px) {
+    .content-section {
+        display: none;
+    } 
+
+    .button-section {
+        display: flex;
+        width: 100vw;
+        margin: 0;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+
+        div {
+            width: 40vw;
+            height: 40vw;
+            color: black;
+            font-size: 15px;
+            padding: 2vh 2vw;
+        
+            img {
+                width: auto;
+                height: 80%;
+                object-fit: contain;
+            }
+        }
+    }
+
+    .phone-view{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 100vw;
+        height: 100vh;
+        background-image: url("../assets/images/roombg.png");
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: cover;
+    }
+
+    img {
+        width: 40vw;
+    }
+
+    .cabinet {
+        margin-top: 2vh;
+        height: 45vh;
+        width: auto;
     }
 }
