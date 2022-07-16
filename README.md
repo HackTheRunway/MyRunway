@@ -5,3 +5,9 @@ A PWA personal closet manager hosted with Github!
 1. Clone this repo.
 2. In command line, open this directory and run `npm install`
 3. Then run `npm start`
+
+## Tutorials/ Inspiration
+
+
+## Credits
+- [pixabay](www.pixabay.com) for the vector images
