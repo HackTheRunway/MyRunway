@@ -9,3 +9,7 @@ ng serve
 
 npm install -g typescript
 tsc --version
+
+TO GENERATE NG COMPONENTS
+ng g c component-name
+
