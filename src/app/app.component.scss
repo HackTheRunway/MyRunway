@@ -1,11 +1,17 @@
+p {
+    margin: 0;
+    font-family: sans-serif;
+}
+
 .content-section {
     display: flex;
     background-image: url("../assets/images/roombg.png");
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
+    justify-content: center;
     align-items: center;
-    height: 100vh;
+    height: 98vh;
     width: 100vw;
 }
 
@@ -19,12 +25,14 @@
     div {
         background-color: pink;
         color: transparent;
-        width: 200px;
-        height: 200px;
+        width: 15vw;
+        height: 15vw;
+        max-width: 200px;
+        max-height: 200px;
         padding: 2vh 2vw;
         border: none;
         border-radius: 20px;
-        margin: 2vw;
+        margin: 2vh 2vw;
         padding: 2vw;
         cursor: pointer;
         display: flex;
@@ -46,28 +54,32 @@
     }
 }
 
-.images {
-    width: 80vw;
-    height: 100%;
+.images-section {
     display: flex;
-    justify-items: center;
+    flex-direction: row;
+    align-items: center;
+    width: 70vw;
+    height: 100vh;
 }
 
 .cat {
-    margin: 0;
     padding: 0;
+    margin: 0 6vw;
 
     img {
         bottom: 2vh;
         max-height: 20vh;
+        width: 10vw;
     }
 }
 
 .cabinet {
-    margin-left: 5vw;
+    cursor: pointer;
 
     img {
-        max-height: 90%;
+        max-width: 50%;
+        bottom: 2vh;
+        right: 2vw;
     }
 
     .open {
@@ -80,20 +92,18 @@
         opacity: 1;
     }
     
-    .bottom {
+    .opaque {
         display: none;
     }
 } 
 
-.top{
+.static {
     object-fit: contain;
-    position: absolute;
+    position: absolute;    
 }
 
-.bottom{
+.opaque{
     opacity: 1;
-    object-fit: contain;
-    position: absolute;
 }
 
 .hidden {
