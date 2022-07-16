@@ -154,7 +154,7 @@ h1 {
     display: none;
 }
 
-@media screen and (max-width: 800px) {
+@media (max-width: 900px), (max-height: 500px) {
     .content-section {
         display: none;
     } 
