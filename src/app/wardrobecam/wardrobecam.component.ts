@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {Subject, Observable} from 'rxjs';
 import {WebcamImage, WebcamInitError, WebcamUtil} from 'ngx-webcam';
+import { WearableCategory } from '../models/wearable-category';
+
 
 @Component({
   selector: 'app-wardrobecam',
@@ -8,10 +10,16 @@ import {WebcamImage, WebcamInitError, WebcamUtil} from 'ngx-webcam';
   styleUrls: ['./wardrobecam.component.scss']
 })
 export class WardrobecamComponent implements OnInit {
+  wearableOptions = [WearableCategory.TOP, WearableCategory.BOTTOM, WearableCategory.SOCKS, WearableCategory.SHOES, WearableCategory.ACCESSORY, WearableCategory.HAT];
+
   // manage page state
   public isPhotoTaken = false;
   public photoTitle = "default-title";
   public photoCategory = "";
+  
+  fieldsValidated(): boolean {
+    return this.photoTitle.length > 0 && this.photoCategory.length > 0 && this.isPhotoTaken;
+  }
 
   public SnapshotButtonText = "Snap"
 
@@ -64,13 +72,6 @@ export class WardrobecamComponent implements OnInit {
     console.warn(error);
   }
 
-  // public showNextWebcam(directionOrDeviceId: boolean|string): void {
-  //   // true => move forward through devices
-  //   // false => move backwards through devices
-  //   // string => move to device with given deviceId
-  //   this.nextWebcam.next(directionOrDeviceId);
-  // }
-
   public handleImage(webcamImage: WebcamImage): void {
     console.info('received webcam image', webcamImage);
     this.webcamImage = webcamImage;
@@ -87,5 +88,10 @@ export class WardrobecamComponent implements OnInit {
 
   public get nextWebcamObservable(): Observable<boolean|string> {
     return this.nextWebcam.asObservable();
+  }
+
+  saveWearable() {
+    console.log(this.photoTitle);
+    console.log(this.photoCategory);
   }
 }

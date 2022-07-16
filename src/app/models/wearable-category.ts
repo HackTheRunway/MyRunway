@@ -1,10 +1,8 @@
-enum WearableCategory {
-  TOP = 1,
-  BOTTOM = 2,
-  SOCKS = 3,
-  SHOES = 4,
-  ACCESSORY = 5,
-  HAT = 6,
+export enum WearableCategory {
+  TOP = 'top',
+  BOTTOM = 'bottom',
+  SOCKS = 'socks',
+  SHOES = 'shoes',
+  ACCESSORY = 'accessory',
+  HAT = 'hat',
 }
-
-export default WearableCategory;

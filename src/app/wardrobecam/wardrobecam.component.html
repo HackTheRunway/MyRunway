@@ -41,37 +41,36 @@
         class="actionBtn"
         (click)="triggerSnapshot()"
       >
-        {{SnapshotButtonText}}
+        {{ SnapshotButtonText }}
       </button>
-      <!-- <button
-        class="actionBtn"
-        (click)="showNextWebcam(true)"
-        [disabled]="!multipleWebcamsAvailable"
-      >
-        Change Webcam
-      </button> -->
+
       <button id="wardrobecam-cancel" [routerLink]="['/']">Cancel</button>
     </div>
   </div>
-</div>
-
-
-
-<!-- <input
-  id="cameraSwitchCheckbox"
-  type="checkbox"
-  [(ngModel)]="allowCameraSwitch"
-/><label for="cameraSwitchCheckbox">Allow Camera Switch</label> -->
-<br />
-<!-- DeviceId:
-<input id="deviceId" type="text" [(ngModel)]="deviceId" style="width: 500px" />
-<button (click)="showNextWebcam(deviceId)">Activate</button> -->
-
-<div class="snapshot" *ngIf="webcamImage">
-  <h2>Nice one!</h2>
 </div>
 
 <h4 *ngIf="errors.length > 0">Messages:</h4>
 <ul *ngFor="let error of errors">
   <li>{{ error | json }}</li>
 </ul>
+
+<h4>Add Item</h4>
+<form class="example-form">
+  <mat-form-field appearance="fill">
+    <mat-label>Category</mat-label>
+    <mat-select>
+      <mat-option *ngFor="let wearable of wearableOptions" [value]="wearable">
+        {{ wearable }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field class="example-full-width" appearance="fill">
+    <mat-label>Wearable title</mat-label>
+    <input matInput placeholder="Eg. White Blouse" />
+  </mat-form-field>
+</form>
+
+<button id="save" class="actionBtn"
+(click)="saveWearable()" [disabled]="fieldsValidated">Save</button>
+>Save</button>
