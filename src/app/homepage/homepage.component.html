@@ -1,1 +1,47 @@
-<p>homepage works!</p>
+<!-- Content Section -->
+<div class="content-section">
+    <!-- Buttons Section -->
+    <div class="button-section">
+        <div [routerLink]="['/']">
+          <img src="../../assets/images/mixnmatch.png">
+          <p>Mix & match</p>
+        </div>
+        <div [routerLink]="['/wardrobecam']">
+          <img src="../../assets/images/camera.jpg">
+          <p>Add new clothes</p>
+        </div>
+    </div>
+  
+    <!-- Images -->
+    <div class="images-section">
+        <div class="cat">
+          <img class="static" src="../../assets/images/cat.png">
+          <img class="static opaque animate" src="../../assets/images/cat-lick.png">
+        </div>
+        <div class="cabinet" onclick="location.href = ''">
+            <img class="static open" src="../../assets/images/open-cabinet.png">
+            <img class="static opaque" src="../../assets/images/closed-cabinet.png">
+        </div>
+    </div> 
+  </div>
+  
+  <div class="phone-view">
+    <h1>MyRunway</h1>
+    <!-- Buttons Section -->
+        <div class="button-section">
+            <div [routerLink]="['/']">
+              <img src="../../assets/images/mixnmatch.png">
+              <p>Mix & match</p>
+            </div>
+            <div [routerLink]="['/wardrobecam']">
+              <img src="../../assets/images/camera.jpg">
+              <p>Add new clothes</p>
+            </div>
+        </div>
+      
+        <img class="cabinet" src="../assets/images/open-cabinet.png" onclick="location.href= ''">
+  </div>
+  
+  
+  <router-outlet></router-outlet>
+  
