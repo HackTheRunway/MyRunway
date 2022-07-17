@@ -17,6 +17,32 @@ export class MatchComponent implements OnInit {
   //wearables: Wearable[] = [];
   service: DataStorageService;
   filtered_wearables: { image: string, category: string }[] = [];
+  images : {[key: string]: {image: string, category: string}} = {
+    hat: {
+      image: '../../assets/images/hat-icon.png',
+      category: WearableCategory.HAT
+    },
+    top: {
+      image: '../../assets/images/top-icon.jpg',
+      category: WearableCategory.TOP
+    },
+    bottom: {
+      image: '../../assets/images/bottom-icon.png',
+      category: WearableCategory.BOTTOM
+    },
+    shoes: {
+      image: '../../assets/images/shoes-icon.png',
+      category: WearableCategory.SHOES
+    },
+    socks: {
+      image: '../../assets/images/socks-icon.png',
+      category: WearableCategory.SOCKS
+    },
+    accessory: {
+      image: '../../assets/images/accessories-icon.png',
+      category: WearableCategory.ACCESSORY
+    }
+  }
 
 
   constructor(service: DataStorageService) {
@@ -72,17 +98,11 @@ export class MatchComponent implements OnInit {
   }
 
   handleClick(event: any) {
-    let chosenCat = event.category;
+    let chosenCat: string = event.category;
     let chosenImg = event.image;
-    
-    console.log(chosenCat);
-    console.log(chosenImg);
-
     let item = document.getElementById(chosenCat);
     if (item) {
-      console.log("item found")
-      let src = item.getAttribute("src");
-      src = chosenImg;
+      this.images[chosenCat].image = chosenImg;
     }
     ;
   } 
