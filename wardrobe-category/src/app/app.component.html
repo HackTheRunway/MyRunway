@@ -24,6 +24,15 @@
     placeholder='Select a category' popupHeight='200px' popupWidth='250px'>
 
   </ejs-dropdownlist> -->
+
+  <mat-form-field>
+    <mat-label>List of categories</mat-label>
+    <mat-select>
+      <mat-option *ngFor="let category of categories" [type]="category.type">
+        {{ category.typeValue }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
   
   <categories></categories>
 
