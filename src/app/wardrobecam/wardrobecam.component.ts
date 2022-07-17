@@ -120,7 +120,7 @@ export class WardrobecamComponent implements OnInit {
 
     if (this.isUsingCamera) {
       if (this.webcamImage && this.wearableCategory && this.wearableTitle) {
-        var newWearable = new Wearable(this.numWearables, this.wearableTitle, <WearableCategory>this.getKeyName(this.wearableCategory), this.webcamImage.imageAsBase64)
+        var newWearable = new Wearable(this.numWearables, this.wearableTitle, <WearableCategory>this.getKeyName(this.wearableCategory), "data:image/png;base64," + this.webcamImage.imageAsBase64)
 
         this.wearables.push(newWearable);
         this.service.setWearables(this.wearables, this.numWearables);
@@ -175,14 +175,19 @@ export class WardrobecamComponent implements OnInit {
       console.log("FileUpload -> files", fileList);
       var file: File = fileList[0];
       var reader = new FileReader();
-      // reader.onload = (e: any) => {
-      //   imgString = reader.readAsDataURL(file);
-      //   console.log(imgString)
-      // } 
-      // reader.onerror = (error: any) => {
-      //   console.log('Error: ', error);
-      // }
+      reader.readAsDataURL(file)
+      reader.onload = (e: any) => {
+        console.log(reader.result)
+        if (reader.result) {
+          this.imgString = <string>reader.result;
+        }
+      } 
+      reader.onerror = (error: any) => {
+        console.log('Error: ', error);
+      }
 
+      // clear the input field
+      element.value = "";
     }
   }
 
