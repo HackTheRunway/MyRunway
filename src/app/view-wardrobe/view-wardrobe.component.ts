@@ -23,6 +23,7 @@ export class ViewWardrobeComponent implements OnInit {
   data: string = '';
 
   msg:string = '';
+  msg_fil:string = '';
 
   constructor(service: DataStorageService) { 
     this.service = service;
@@ -80,5 +81,37 @@ export class ViewWardrobeComponent implements OnInit {
     // process to display images
 
     return this.msg;
+  }
+
+  filterCat(message: string) {
+    //this.displayValue = this.textInput;
+    //this.msg='Button is Clicked';
+    
+    message = message.toLowerCase();
+
+    switch(message) {
+      case "top":
+        this.msg_fil = "The category selected is Top.";
+        break;
+      case "bottom":
+        this.msg_fil = "The category selected is Bottom.";
+        break;
+      case "accessory":
+        this.msg_fil = "The category selected is Accessory.";
+        break;
+      case "hat":
+        this.msg_fil = "The category selected is Hat.";
+        break;
+      case "shoes":
+        this.msg_fil = "The category selected is Shoes.";
+        break;
+      case "socks":
+        this.msg_fil = "The category selected is Socks.";
+        break;
+    }
+
+    // process to display images
+
+    return this.msg_fil;
   }
 }
