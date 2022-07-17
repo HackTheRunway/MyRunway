@@ -11,7 +11,7 @@ import { DataStorageService } from '../data-storage.service';
 export class ViewWardrobeComponent implements OnInit {
   wearableOptions = [WearableCategory.TOP, WearableCategory.BOTTOM, WearableCategory.SOCKS, WearableCategory.SHOES, WearableCategory.ACCESSORY, WearableCategory.HAT];
 
-  wearables: Wearable[];
+  wearables: Wearable[] | undefined;
   service: DataStorageService;
   public wearableCategory = "";
   public wearableTitle = "";
@@ -26,7 +26,9 @@ export class ViewWardrobeComponent implements OnInit {
 
   constructor(service: DataStorageService) { 
     this.service = service;
-    this.wearables = service.getWearables();
+    service.getWearablesAsync().then((wearables) => {
+      this.wearables = wearables;
+    });
   }
 
   ngOnInit(): void {
