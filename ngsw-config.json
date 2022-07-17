@@ -3,7 +3,7 @@
   "index": "/index.html",
   "assetGroups": [
     {
-      "name": "MyRunway",
+      "name": "angular-pwa",
       "installMode": "prefetch",
       "resources": {
         "files": [
