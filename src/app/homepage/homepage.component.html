@@ -18,7 +18,7 @@
           <img class="static" src="../../assets/images/cat.png">
           <img class="static opaque animate" src="../../assets/images/cat-lick.png">
         </div>
-        <div class="cabinet" onclick="location.href = ''">
+        <div class="cabinet" [routerLink]="['/viewwardrobe']">
             <img class="static open" src="../../assets/images/open-cabinet.png">
             <img class="static opaque" src="../../assets/images/closed-cabinet.png">
         </div>
@@ -38,8 +38,10 @@
               <p>Add new clothes</p>
             </div>
         </div>
-      
-        <img class="cabinet" src="../../assets/images/open-cabinet.png" onclick="location.href= ''">
+        
+        <div [routerLink]="['/viewwardrobe']">
+          <img class="cabinet" src="../../assets/images/open-cabinet.png">
+        </div>
   </div>
   
   
