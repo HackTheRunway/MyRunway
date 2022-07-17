@@ -28,6 +28,7 @@
           [(ngModel)]="wearableCategory"
           (ngModelChange)="modelChangeFn($event)"
           name="wearableCategory"
+          (selectionChange)="filterCat(wearableCategory)"
         >
           <mat-option
             *ngFor="let wearable of wearableOptions"
@@ -37,12 +38,56 @@
           </mat-option>
         </mat-select>
     </mat-form-field>
+
+    <h2 id="filter-msg">{{msg_fil}}</h2>
   
-    <div>
+    <!-- Display all images -->
+    <h2>Bottom</h2>
+    <div *ngIf="{{isTop}}">
       <img class="images" src="../assets/bottom/jeans shorts.jpg">
       <img class="images" src="../assets/bottom/jeans.jpg">
       <img class="images" src="../assets/bottom/pink shirt.jpg">
       <img class="images" src="../assets/bottom/red skirt.jpg">
+    </div>
+
+    <h2>Top</h2>
+    <div>
+        <img class="images" src="../assets/top/black crop top.jpg">
+        <img class="images" src="../assets/top/black shirt.png">
+        <img class="images" src="../assets/top/checked shirt.jpg">
+        <img class="images" src="../assets/top/pink shirt.jpg">  
+    </div>
+
+    <h2>Hat</h2>
+    <div>
+        <img class="images" src="../assets/hat/floral hat.jpg">
+    </div>
+  
+    <h2>Accessory</h2>
+    <div>
+        <img class="images" src="../assets/accessory/diamond necklace.png">
+        <img class="images" src="../assets/accessory/gold necklace.png">
+        <img class="images" src="../assets/accessory/heart necklace.png">
+        <img class="images" src="../assets/accessory/heart ring.jpg">
+        <img class="images" src="../assets/accessory/ring.jpg">
+        <img class="images" src="../assets/accessory/watch.jpg">
+    </div>
+    
+    <h2>Shoes</h2>
+    <div>
+        <img class="images" src="../assets/shoes/adidas slides.jpg">
+        <img class="images" src="../assets/shoes/adidas.png">
+        <img class="images" src="../assets/shoes/black heels.jpg">
+        <img class="images" src="../assets/shoes/red converse.jpg">
+        <img class="images" src="../assets/shoes/slipper.jpg">
+    </div>
+    
+    <h2>Socks</h2>
+    <div>
+        <img class="images" src="../assets/socks/black socks.jpg">
+        <img class="images" src="../assets/socks/colorful socks.jpg">
+        <img class="images" src="../assets/socks/pink socks.jpg">
+        <img class="images" src="../assets/socks/socks.jpg">
     </div>
   
   </main>
