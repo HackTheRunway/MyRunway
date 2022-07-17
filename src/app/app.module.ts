@@ -13,9 +13,10 @@ import { MatInputModule } from '@angular/material/input';
 import { MatOptionModule } from '@angular/material/core';
 import { MatSelectModule } from '@angular/material/select';
 import { DataStorageService } from './data-storage.service';
+import { ViewWardrobeComponent } from './view-wardrobe/view-wardrobe.component';
 
 @NgModule({
-  declarations: [AppComponent, HomepageComponent, WardrobecamComponent],
+  declarations: [AppComponent, HomepageComponent, WardrobecamComponent, ViewWardrobeComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,

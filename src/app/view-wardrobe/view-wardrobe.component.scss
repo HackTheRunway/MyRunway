@@ -1,0 +1,39 @@
+input, button {
+    border: solid 1px #555B6E;
+    border-radius: 2px;
+    display: inline-block;
+    padding: 0;
+}
+
+input {
+    width: 200px;
+    height: 40px;
+    border-radius: 2px 0 0 2px;
+    color: #888c9c;
+    border: solid 1px #888c9c;
+    padding: 0 5px 0 10px;
+}
+
+button {
+    width: 70px;
+    height: 42px;
+    background-color: #4468e8;
+    color: white;
+    border: solid 1px #4468e8;
+    border-radius: 0 2px 2px 0;
+}
+
+label {
+    display: block;
+    color: #888c9c;
+}
+
+main {
+    width: 2000px;
+    height: 4000px;
+    background-color: rgb(195, 231, 231);
+}
+
+#category-search {
+    margin-bottom: 15px;
+}
