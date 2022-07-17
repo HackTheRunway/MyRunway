@@ -61,8 +61,8 @@ export class MatchComponent implements OnInit {
     }
   }
 
-  submit() {
-    this.search(this.searchTerm);
+  goHome() {
+    location.href = ''
   }
 
   ngOnInit(): void {}

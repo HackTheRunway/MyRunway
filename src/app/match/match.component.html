@@ -1,6 +1,6 @@
 <mat-sidenav-container mode="over" class="example-container">
   <mat-sidenav #side mode="over">
-    <form (ngSubmit)="submit()">
+    <form>
       <mat-form-field appearance="fill">
         <mat-label>Filter</mat-label>
         <mat-select (selectionChange)="search($event.value)">
@@ -32,6 +32,20 @@
         <span class="material-symbols-outlined"> checkroom </span>
       </mat-icon>
     </button>
+
+    <button
+      class="tab"
+      type="button"
+      mat-button
+      color="primary"
+      (click)="goHome()"
+      style="top: 150px"
+    >
+      <mat-icon>
+        <span class="material-symbols-outlined">home</span>
+      </mat-icon>
+    </button>
+
     <div class="column">
       <div class="wearable-grid-item small">
         <img src="../../assets/images/hat-icon.png" alt="Hat" />
