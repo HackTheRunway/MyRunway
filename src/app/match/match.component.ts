@@ -87,6 +87,11 @@ export class MatchComponent implements OnInit {
           wearable.category === WearableCategory.ACCESSORY
         );
         break;
+      case 'socks':
+          this.filtered_wearables = this.wearables.filter((wearable) =>
+            wearable.category === WearableCategory.SOCKS
+          );
+          break;
       default:
         this.filtered_wearables = this.wearables;
         break;
