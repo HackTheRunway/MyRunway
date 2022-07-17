@@ -1,5 +1,4 @@
-import { Component, OnInit,ViewChild, AfterViewInit } from '@angular/core';
-//import { MatSelect } from '@angular/material/select';
+import { Component, OnInit } from '@angular/core';
 import { DataStorageService } from '../data-storage.service';
 import Wearable from '../models/wearable';
 import { WearableCategory } from '../models/wearable-category';
@@ -14,29 +13,18 @@ export class MatchComponent implements OnInit {
   searchTerm: string = '';
   wearable_types = [WearableCategory.TOP, WearableCategory.BOTTOM, WearableCategory.SOCKS, WearableCategory.SHOES, WearableCategory.ACCESSORY, WearableCategory.HAT];
 
-  wearables = data.clothes;
-  //wearables: Wearable[];
+  wearables: Wearable[] = [];
   service: DataStorageService;
   filtered_wearables: { image: string, category: string }[] = [];
-  
-  //filtered_wearables: Wearable[];
 
   constructor(service: DataStorageService) {
     this.service = service;
-    //this.wearables = service.getWearables();
-    //this.filtered_wearables = service.getWearables();
-    this.filtered_wearables = this.wearables;
+    service.getWearablesAsync().then((wearables) => {
+      this.wearables = wearables;
+      this.filtered_wearables = wearables;
+    });
   }
 
- /*  @ViewChild('matSelect')
-  matSelect: MatSelect = new MatSelect;
-
-  ngAfterViewInit() {
-    this.matSelect.valueChange.subscribe(value => {
-        console.log(value);
-    });
-}
- */
   search(query: string) {
     this.searchTerm = query;
     console.log(query)
@@ -73,9 +61,10 @@ export class MatchComponent implements OnInit {
     }
   }
 
-  public getWearableBtn() {
-    console.log( this.service.getWearables())
+  submit() {
+    this.search(this.searchTerm);
   }
 
   ngOnInit(): void {}
+
 }

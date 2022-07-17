@@ -1,17 +1,23 @@
 <mat-sidenav-container mode="over" class="example-container">
   <mat-sidenav #side mode="over">
-    <mat-form-field appearance="fill">
-      <mat-label>Filter</mat-label>
-      <mat-select>
-        <mat-option>All</mat-option>
-        <mat-option *ngFor="let type of wearable_types" [value]="type" (onSelectionChange)="search(type)"  >{{
-          type
-        }}</mat-option>
-      </mat-select>
-    </mat-form-field>
-    <mat-grid-list cols = "3">
-       <mat-list-item *ngFor="let wearable of filtered_wearables" >
-      <img [src]="wearable.image"></mat-list-item>
+    <form (ngSubmit)="submit()">
+      <mat-form-field appearance="fill">
+        <mat-label>Filter</mat-label>
+        <mat-select (selectionChange)="search($event.value)">
+          <mat-option>All</mat-option>
+          <mat-option
+            *ngFor="let type of wearable_types"
+            [value]="type"
+            (onSelectionChange)="search(type)"
+            >{{ type }}</mat-option
+          >
+        </mat-select>
+      </mat-form-field>
+    </form>
+    <mat-grid-list cols="3">
+      <mat-list-item *ngFor="let wearable of filtered_wearables">
+        <img [src]="wearable.image"
+      /></mat-list-item>
     </mat-grid-list>
   </mat-sidenav>
   <mat-sidenav-content>

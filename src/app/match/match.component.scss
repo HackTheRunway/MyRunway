@@ -45,9 +45,6 @@ mat-icon {
     position: absolute;
     top: 0;
     left: 0;
-}
-
-button { 
     background-color: pink;
     width: 5vw;
     height: 5vw;
@@ -65,7 +62,7 @@ button {
     min-width: 100px;
 }
 
-button:hover {
+.tab:hover {
     opacity: 0.75;
     background-color: pink;
     color: white;
