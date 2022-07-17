@@ -41,6 +41,10 @@ export class ViewWardrobeComponent implements OnInit {
     });
   }
 
+  goHome() {
+    location.href = ''
+  }
+
   ngOnInit(): void {
   }
 
@@ -69,26 +73,62 @@ export class ViewWardrobeComponent implements OnInit {
       case "top":
         this.msg = "The category selected is Top.";
         this.curCat = "Top";
+        this.isTop = true;
+        this.isBottom = false;
+        this.isHat = false;
+        this.isAccessory = false;
+        this.isSocks = false;
+        this.isShoes = false;
         break;
       case "bottom":
         this.msg = "The category selected is Bottom.";
         this.curCat = "Bottom";
+        this.isTop = false;
+        this.isBottom = true;
+        this.isHat = false;
+        this.isAccessory = false;
+        this.isSocks = false;
+        this.isShoes = false;
         break;
       case "accessory":
         this.msg = "The category selected is Accessory.";
         this.curCat = "Accessory";
+        this.isTop = false;
+        this.isBottom = false;
+        this.isHat = false;
+        this.isAccessory = true;
+        this.isSocks = false;
+        this.isShoes = false;
         break;
       case "hat":
         this.msg = "The category selected is Hat.";
         this.curCat = "Hat";
+        this.isTop = false;
+        this.isBottom = false;
+        this.isHat = true;
+        this.isAccessory = false;
+        this.isSocks = false;
+        this.isShoes = false;
         break;
       case "shoes":
         this.msg = "The category selected is Shoes.";
         this.curCat = "Shoes";
+        this.isTop = false;
+        this.isBottom = false;
+        this.isHat = false;
+        this.isAccessory = false;
+        this.isSocks = false;
+        this.isShoes = true;
         break;
       case "socks":
         this.msg = "The category selected is Socks.";
         this.curCat = "Socks";
+        this.isTop = false;
+        this.isBottom = false;
+        this.isHat = false;
+        this.isAccessory = false;
+        this.isSocks = true;
+        this.isShoes = false;
         break;
       default:
         this.msg = "Sorry I do not know this category. Please select from the following available categories: 1.Top 2.Bottom 3.Accessory 4.Hat 5.Shoes 6.Socks"
@@ -110,26 +150,62 @@ export class ViewWardrobeComponent implements OnInit {
       case "top":
         this.msg_fil = "The category selected is Top.";
         this.curCat = "Top";
+        this.isTop = true;
+        this.isBottom = false;
+        this.isHat = false;
+        this.isAccessory = false;
+        this.isSocks = false;
+        this.isShoes = false;
         break;
       case "bottom":
         this.msg_fil = "The category selected is Bottom.";
         this.curCat = "Bottom";
+        this.isTop = false;
+        this.isBottom = true;
+        this.isHat = false;
+        this.isAccessory = false;
+        this.isSocks = false;
+        this.isShoes = false;
         break;
       case "accessory":
         this.msg_fil = "The category selected is Accessory.";
         this.curCat = "Accessory";
+        this.isTop = false;
+        this.isBottom = false;
+        this.isHat = false;
+        this.isAccessory = true;
+        this.isSocks = false;
+        this.isShoes = false;
         break;
       case "hat":
         this.msg_fil = "The category selected is Hat.";
         this.curCat = "Hat";
+        this.isTop = false;
+        this.isBottom = false;
+        this.isHat = true;
+        this.isAccessory = false;
+        this.isSocks = false;
+        this.isShoes = false;
         break;
       case "shoes":
         this.msg_fil = "The category selected is Shoes.";
         this.curCat = "Shoes";
+        this.isTop = false;
+        this.isBottom = false;
+        this.isHat = false;
+        this.isAccessory = false;
+        this.isSocks = false;
+        this.isShoes = true;
         break;
       case "socks":
         this.msg_fil = "The category selected is Socks.";
         this.curCat = "Socks";
+        this.isTop = false;
+        this.isBottom = false;
+        this.isHat = false;
+        this.isAccessory = false;
+        this.isSocks = true;
+        this.isShoes = false;
         break;
     }
 
