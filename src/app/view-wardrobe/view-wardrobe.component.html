@@ -4,10 +4,23 @@
     <!-- <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script> -->
     <h1>MyRunway</h1>
     
+    <!-- <label for="category-search">Search for a category</label>
+    <input id="category-search" placeholder="Ex: Top"> -->
+    <!-- <button mat-button>search</button> -->
+
+    <!-- Display search bar -->
+    <ul>
+        <li *ngFor="let data of sampleData"> {{ data.username }} </li>
+    </ul>
+      
     <label for="category-search">Search for a category</label>
-    <input id="category-search" placeholder="Ex: Top"><button mat-button>search</button>
-    <!-- <button>search</button> -->
+    <input type="text" [(ngModel)]="textInput" id="category-search" placeholder="Ex: Top">
+    <button (click)="onClick(textInput)">search</button>
+
+    <!-- Display search result -->
+    <h2 id="search-msg" >{{msg}}</h2>
   
+    <!-- Display drop down box -->
     <label for="category-filter">Filter for a category</label>
     <mat-form-field appearance="fill" id="category-filter">
         <mat-label>Category</mat-label>
