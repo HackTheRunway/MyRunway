@@ -1,1 +1,15 @@
-<p>match works!</p>
+<mat-sidenav-container mode="over" class="example-container">
+  <mat-sidenav #side mode="side">
+    <mat-nav-list>
+      <mat-list-item>Test</mat-list-item>
+      <mat-list-item>Test</mat-list-item>
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <button type="button" mat-button color="primary" (click)="side.toggle()">
+      <mat-icon>
+        <span class="material-symbols-outlined"> checkroom </span></mat-icon
+      >
+    </button>
+  </mat-sidenav-content>
+</mat-sidenav-container>
