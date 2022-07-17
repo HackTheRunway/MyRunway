@@ -162,10 +162,6 @@ export class WardrobecamComponent implements OnInit {
           this.isPhotoTaken = false;
           this.SnapshotButtonText = 'Snap';
           this.showWebcam = true;
-
-          // var image = new Image();
-          // image.src = "data:image/png;base64," + newWearable.image.toString();
-          // document.body.appendChild(image);
         }
       } else {
         if (this.imgString && this.wearableCategory && this.wearableTitle) {
