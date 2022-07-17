@@ -4,14 +4,14 @@
       <mat-label>Filter</mat-label>
       <mat-select>
         <mat-option>All</mat-option>
-        <mat-option *ngFor="let type of wearable_types" [value]="type" (onSelectionChange)="search(type)">{{
+        <mat-option *ngFor="let type of wearable_types" [value]="type" (onSelectionChange)="search(type)"  >{{
           type
         }}</mat-option>
       </mat-select>
     </mat-form-field>
     <mat-grid-list cols = "3">
-      <mat-list-item *ngFor="let wearable of filtered_wearables" >
-      <img src={{wearable.base64String}}></mat-list-item>
+       <mat-list-item *ngFor="let wearable of filtered_wearables" >
+      <img [src]="wearable.image"></mat-list-item>
     </mat-grid-list>
   </mat-sidenav>
   <mat-sidenav-content>
@@ -44,7 +44,9 @@
       <div class="wearable-grid-item small">
         <img src="../../assets/images/accessories-icon.png" alt="Accessories" />
       </div>
-      <span class="spacer"></span> 
+      <div class="wearable-grid-item small">
+        <img src="../../assets/images/socks-icon.png" alt="Socks" />
+      </div>
     </div>
   </mat-sidenav-content>
 </mat-sidenav-container>

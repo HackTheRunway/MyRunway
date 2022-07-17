@@ -1,4 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,ViewChild, AfterViewInit } from '@angular/core';
+//import { MatSelect } from '@angular/material/select';
+import { DataStorageService } from '../data-storage.service';
+import Wearable from '../models/wearable';
+import { WearableCategory } from '../models/wearable-category';
+import data from '../../assets/storage.json';
 
 @Component({
   selector: 'app-match',
@@ -7,50 +12,70 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MatchComponent implements OnInit {
   searchTerm: string = '';
-  wearable_types: string[] = [
-    'Hats',
-    'Tops',
-    'Bottoms',
-    'Shoes',
-    'Accessories',
-  ];
+  wearable_types = [WearableCategory.TOP, WearableCategory.BOTTOM, WearableCategory.SOCKS, WearableCategory.SHOES, WearableCategory.ACCESSORY, WearableCategory.HAT];
 
-  filtered_wearables: { base64String: string; tag: string; }[] = [];
+  wearables = data.clothes;
+  //wearables: Wearable[];
+  service: DataStorageService;
+  filtered_wearables: { image: string, category: string }[] = [];
+  
+  //filtered_wearables: Wearable[];
 
+  constructor(service: DataStorageService) {
+    this.service = service;
+    //this.wearables = service.getWearables();
+    //this.filtered_wearables = service.getWearables();
+    this.filtered_wearables = this.wearables;
+  }
+
+ /*  @ViewChild('matSelect')
+  matSelect: MatSelect = new MatSelect;
+
+  ngAfterViewInit() {
+    this.matSelect.valueChange.subscribe(value => {
+        console.log(value);
+    });
+}
+ */
   search(query: string) {
-    this.searchTerm=query;
-    
+    this.searchTerm = query;
+    console.log(query)
     switch (query) {
-      case 'Hats':
+      case 'hat':
         this.filtered_wearables = this.wearables.filter((wearable) =>
-          wearable.tag === 'Hat'
+          wearable.category === WearableCategory.HAT
         );
         console.log(this.filtered_wearables)
         break;
-      case 'Shoes':
+      case 'shoes':
         this.filtered_wearables = this.wearables.filter((wearable) =>
-          wearable.tag === 'Shoes'
+          wearable.category === WearableCategory.SHOES
         );
         break;
-      case 'Tops':
+      case 'top':
         this.filtered_wearables = this.wearables.filter((wearable) =>
-          wearable.tag === 'Top'
+          wearable.category === WearableCategory.TOP
         );
         break;
-      case 'Bottoms':
+      case 'bottom':
         this.filtered_wearables = this.wearables.filter((wearable) =>
-          wearable.tag === 'Bottom'
+          wearable.category === WearableCategory.BOTTOM
         );
         break;
-      case 'Accessories':
+      case 'accessory':
         this.filtered_wearables = this.wearables.filter((wearable) =>
-          wearable.tag === 'Accessory'
+          wearable.category === WearableCategory.ACCESSORY
         );
+        break;
+      default:
+        this.filtered_wearables = this.wearables;
         break;
     }
   }
 
-  constructor() {}
+  public getWearableBtn() {
+    console.log( this.service.getWearables())
+  }
 
   ngOnInit(): void {}
 }
