@@ -59,13 +59,16 @@
       <ng-template #uploadBlock>
         <div id="upload-container">
           <!-- select image to upload field -->
+          <div class="snapshot" *ngIf="imgString">
+            <img [src]="imgString" />
+          </div>
+
           <input
             type="file"
             id="image-upload-input"
             accept="image/*"
             (change)="handleFileInput($event)"
           />
-      
 
           <button
             id="toggleImgInput"
@@ -125,3 +128,7 @@
 </div>
 
 <button id="wardrobecam-cancel" [routerLink]="['/']">Back to Home</button>
+
+<!-- <button id="toggleImgInput" class="actionBtn" (click)="getWearableBtn()">
+  Take Photo Instead
+</button> -->
