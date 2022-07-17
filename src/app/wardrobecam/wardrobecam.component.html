@@ -1,9 +1,15 @@
-<div id="main-container" >
+<div id="main-container">
   <h1>Add Wearable</h1>
   <p>Center your wearable and snap a photo!</p>
   <div class="contents-container">
     <div class="wardrobecam">
-      <div id="wardrobecam-container">
+      <div
+        id="image-upload-options"
+        *ngIf="isUsingCamera; then cameraBlock; else uploadBlock"
+      ></div>
+
+      <ng-template #cameraBlock>
+        <div id="wardrobecam-container">
           <div
             id="wardrobecam-image-display"
             *ngIf="isPhotoTaken; then staticPhotoBlock; else liveCamBlock"
@@ -26,22 +32,53 @@
           <ng-template #staticPhotoBlock>
             <div id="wardrobecam-preview-image">
               <div class="snapshot" *ngIf="webcamImage">
-                <img  [src]="webcamImage.imageAsDataUrl" />
+                <img [src]="webcamImage.imageAsDataUrl" />
               </div>
             </div>
           </ng-template>
-      </div>
-      <div id="wardrobecam-controls">
-        <button
-          id="wardrobecam-snap"
-          class="actionBtn"
-          (click)="triggerSnapshot()"
-        >
-          {{ SnapshotButtonText }}
-        </button>
+        </div>
 
-        <button id="wardrobecam-cancel" [routerLink]="['/']">Cancel</button>
-      </div>
+        <div id="wardrobecam-controls">
+          <button
+            id="wardrobecam-snap"
+            class="actionBtn"
+            (click)="triggerSnapshot()"
+          >
+            {{ SnapshotButtonText }}
+          </button>
+          <button
+            id="toggleImgInput"
+            class="actionBtn"
+            (click)="toggleImgInput()"
+          >
+            Upload Image Instead
+          </button>
+        </div>
+      </ng-template>
+
+      <ng-template #uploadBlock>
+        <div id="upload-container">
+          <!-- select image to upload field -->
+          <div class="snapshot" *ngIf="imgString">
+            <img [src]="imgString" />
+          </div>
+
+          <input
+            type="file"
+            id="image-upload-input"
+            accept="image/*"
+            (change)="handleFileInput($event)"
+          />
+
+          <button
+            id="toggleImgInput"
+            class="actionBtn"
+            (click)="toggleImgInput()"
+          >
+            Take Photo Instead
+          </button>
+        </div>
+      </ng-template>
     </div>
 
     <div class="controls">
@@ -82,7 +119,7 @@
         id="save"
         class="actionBtn"
         (click)="saveWearable()"
-        [disabled]="! isFieldsValidated"
+        [disabled]="!isFieldsValidated"
       >
         Save
       </button>
@@ -90,11 +127,8 @@
   </div>
 </div>
 
+<button id="wardrobecam-cancel" [routerLink]="['/']">Back to Home</button>
 
-<!-- <button
-          id="wardrobecam-snap"
-          class="actionBtn"
-          (click)="getWearableBtn()"
-        >
-          AAAAAAAAAAAA
-        </button> -->
+<!-- <button id="toggleImgInput" class="actionBtn" (click)="getWearableBtn()">
+  Take Photo Instead
+</button> -->

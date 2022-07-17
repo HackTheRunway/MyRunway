@@ -16,15 +16,21 @@ export class WardrobecamComponent implements OnInit {
 
   // manage page state
   public isPhotoTaken = false;
+  public isUsingCamera = true;
   public wearableTitle = "";
   public wearableCategory = "";
   public isFieldsValidated = false;
   wearables: Wearable[];
   service: DataStorageService;
   numWearables: number = 0;
+  imgString: string = "";
 
   private fieldsValidated(): boolean {
-    return this.wearableTitle.length > 0 && this.wearableCategory.length > 0 && this.isPhotoTaken;
+    if (this.isUsingCamera) {
+      return this.wearableTitle.length > 0 && this.wearableCategory.length > 0 && this.isPhotoTaken;
+    } else {
+      return this.wearableTitle.length > 0 && this.wearableCategory.length > 0 && this.imgString.length > 0;
+    }
   }
 
   public SnapshotButtonText = "Snap"
@@ -112,30 +118,77 @@ export class WardrobecamComponent implements OnInit {
   saveWearable() {
     this.numWearables = this.service.getNumWearables() + 1
 
-    if (this.webcamImage && this.wearableCategory && this.wearableTitle) {
-      var newWearable = new Wearable(this.numWearables, this.wearableTitle, <WearableCategory>this.getKeyName(this.wearableCategory), this.webcamImage.imageAsBase64)
+    if (this.isUsingCamera) {
+      if (this.webcamImage && this.wearableCategory && this.wearableTitle) {
+        var newWearable = new Wearable(this.numWearables, this.wearableTitle, <WearableCategory>this.getKeyName(this.wearableCategory), "data:image/png;base64," + this.webcamImage.imageAsBase64)
 
-      this.wearables.push(newWearable);
-      this.service.setWearables(this.wearables, this.numWearables);
+        this.wearables.push(newWearable);
+        this.service.setWearables(this.wearables, this.numWearables);
 
-      console.log(this.wearables)
+        console.log(this.wearables)
 
-      this.isFieldsValidated = false;
-      this.wearableTitle = "";
-      this.wearableCategory = "";
-      this.webcamImage = undefined;
-      this.isPhotoTaken = false;
-      this.SnapshotButtonText = "Snap";
-      this.showWebcam = true;
+        this.isFieldsValidated = false;
+        this.wearableTitle = "";
+        this.wearableCategory = "";
+        this.webcamImage = undefined;
+        this.isPhotoTaken = false;
+        this.SnapshotButtonText = "Snap";
+        this.showWebcam = true;
 
-      // var image = new Image();
-      // image.src = "data:image/png;base64," + newWearable.image.toString();
-      // document.body.appendChild(image);
+        // var image = new Image();
+        // image.src = "data:image/png;base64," + newWearable.image.toString();
+        // document.body.appendChild(image);
+      }
+    }
+    else {
+      if (this.imgString && this.wearableCategory && this.wearableTitle) {
+        var newWearable = new Wearable(this.numWearables, this.wearableTitle, <WearableCategory>this.getKeyName(this.wearableCategory), this.imgString)
+
+        this.wearables.push(newWearable);
+        this.service.setWearables(this.wearables, this.numWearables);
+
+        console.log(this.wearables)
+
+        this.isFieldsValidated = false;
+        this.wearableTitle = "";
+        this.wearableCategory = "";
+        this.imgString = "";
+        this.isPhotoTaken = false;
+        this.SnapshotButtonText = "Snap";
+
+      }
     }
   }
 
   public getWearableBtn() {
    console.log( this.service.getWearables())
+  }
+
+  toggleImgInput() {
+    this.isUsingCamera = !this.isUsingCamera;
+  }
+
+  handleFileInput(event: Event) {
+    const element = event.currentTarget as HTMLInputElement;
+    let fileList: FileList | null = element.files;
+    if (fileList) {
+      console.log("FileUpload -> files", fileList);
+      var file: File = fileList[0];
+      var reader = new FileReader();
+      reader.readAsDataURL(file)
+      reader.onload = (e: any) => {
+        console.log(reader.result)
+        if (reader.result) {
+          this.imgString = <string>reader.result;
+        }
+      } 
+      reader.onerror = (error: any) => {
+        console.log('Error: ', error);
+      }
+
+      // clear the input field
+      element.value = "";
+    }
   }
 
 }
