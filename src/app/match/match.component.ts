@@ -13,16 +13,22 @@ export class MatchComponent implements OnInit {
   searchTerm: string = '';
   wearable_types = [WearableCategory.TOP, WearableCategory.BOTTOM, WearableCategory.SOCKS, WearableCategory.SHOES, WearableCategory.ACCESSORY, WearableCategory.HAT];
 
-  wearables: Wearable[] = [];
+  wearables = data.clothes;
+  //wearables: Wearable[] = [];
   service: DataStorageService;
   filtered_wearables: { image: string, category: string }[] = [];
 
+
   constructor(service: DataStorageService) {
     this.service = service;
-    service.getWearablesAsync().then((wearables) => {
+/*     service.getWearablesAsync().then((wearables) => {
       this.wearables = wearables;
       this.filtered_wearables = wearables;
-    });
+    }); */
+
+    this.wearables = data.clothes;
+    this.filtered_wearables=this.wearables;
+    console.log(this.wearables.length);
   }
 
   search(query: string) {
@@ -64,6 +70,22 @@ export class MatchComponent implements OnInit {
   goHome() {
     location.href = ''
   }
+
+  handleClick(event: any) {
+    let chosenCat = event.category;
+    let chosenImg = event.image;
+    
+    console.log(chosenCat);
+    console.log(chosenImg);
+
+    let item = document.getElementById(chosenCat);
+    if (item) {
+      console.log("item found")
+      let src = item.getAttribute("src");
+      src = chosenImg;
+    }
+    ;
+  } 
 
   ngOnInit(): void {}
 

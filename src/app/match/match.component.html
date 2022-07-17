@@ -15,9 +15,9 @@
       </mat-form-field>
     </form>
     <mat-grid-list cols="3">
-      <mat-list-item *ngFor="let wearable of filtered_wearables">
-        <img [src]="wearable.image"
-      /></mat-list-item>
+      <mat-list-item *ngFor="let wearable of filtered_wearables" (click)="handleClick(wearable)">
+        <img [src]="wearable.image"/>
+      </mat-list-item>        
     </mat-grid-list>
   </mat-sidenav>
   <mat-sidenav-content>
@@ -38,8 +38,8 @@
       type="button"
       mat-button
       color="primary"
-      (click)="goHome()"
       style="top: 150px"
+      [routerLink]="['/']"
     >
       <mat-icon>
         <span class="material-symbols-outlined">home</span>
@@ -48,24 +48,24 @@
 
     <div class="column">
       <div class="wearable-grid-item small">
-        <img src="../../assets/images/hat-icon.png" alt="Hat" />
+        <img id="hat" src="../../assets/images/hat-icon.png" alt="Hat" />
       </div>
       <div class="wearable-grid-item large">
-        <img src="../../assets/images/top-icon.jpg" alt="Top" />
+        <img id="top" src="../../assets/images/top-icon.jpg" alt="Top" />
       </div>
       <div class="wearable-grid-item large">
-        <img src="../../assets/images/bottom-icon.png" alt="Bottom" />
+        <img id="bottom" src="../../assets/images/bottom-icon.png" alt="Bottom" />
       </div>
       <div class="wearable-grid-item small">
-        <img src="../../assets/images/shoes-icon.png" alt="Shoes" />
+        <img id="shoes" src="../../assets/images/shoes-icon.png" alt="Shoes" />
       </div>
     </div>
     <div class="column">
       <div class="wearable-grid-item small">
-        <img src="../../assets/images/accessories-icon.png" alt="Accessories" />
+        <img id="accessory" src="../../assets/images/accessories-icon.png" alt="Accessories" />
       </div>
       <div class="wearable-grid-item small">
-        <img src="../../assets/images/socks-icon.png" alt="Socks" />
+        <img id="socks" src="../../assets/images/socks-icon.png" alt="Socks" />
       </div>
     </div>
   </mat-sidenav-content>
