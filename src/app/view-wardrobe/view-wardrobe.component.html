@@ -1,93 +1,114 @@
 <!-- <p>view-wardrobe works!</p> -->
 
 <main>
-    <!-- <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script> -->
-    <h1>MyRunway</h1>
-    
-    <!-- <label for="category-search">Search for a category</label>
+  <!-- <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script> -->
+  <button (click)="goHome()">home</button>
+  <h1>MyRunway</h1>
+
+  <!-- <label for="category-search">Search for a category</label>
     <input id="category-search" placeholder="Ex: Top"> -->
-    <!-- <button mat-button>search</button> -->
+  <!-- <button mat-button>search</button> -->
 
-    <!-- Display search bar -->
-    <ul>
-        <li *ngFor="let data of sampleData"> {{ data.username }} </li>
-    </ul>
-      
-    <label for="category-search">Search for a category</label>
-    <input type="text" [(ngModel)]="textInput" id="category-search" placeholder="Ex: Top">
-    <button (click)="onClick(textInput)">search</button>
+  <!-- Display search bar -->
+  <ul>
+    <li *ngFor="let data of sampleData">{{ data.username }}</li>
+  </ul>
 
-    <!-- Display search result -->
-    <h2 id="search-msg" >{{msg}}</h2>
-  
-    <!-- Display drop down box -->
-    <label for="category-filter">Filter for a category</label>
-    <mat-form-field appearance="fill" id="category-filter">
-        <mat-label>Category</mat-label>
-        <mat-select
-          [(ngModel)]="wearableCategory"
-          (ngModelChange)="modelChangeFn($event)"
-          name="wearableCategory"
-          (selectionChange)="filterCat(wearableCategory)"
-        >
-          <mat-option
-            *ngFor="let wearable of wearableOptions"
-            [value]="wearable"
-          >
-            {{ wearable }}
-          </mat-option>
-        </mat-select>
-    </mat-form-field>
+  <label for="category-search">Search for a category</label>
+  <input
+    type="text"
+    [(ngModel)]="textInput"
+    id="category-search"
+    placeholder="Ex: Top"
+  />
+  <button (click)="onClick(textInput)">search</button>
 
-    <h2 id="filter-msg">{{msg_fil}}</h2>
-  
-    <!-- Display all images -->
-    <h2>Bottom</h2>
-    <div *ngIf="{{isTop}}">
-      <img class="images" src="../assets/bottom/jeans shorts.jpg">
-      <img class="images" src="../assets/bottom/jeans.jpg">
-      <img class="images" src="../assets/bottom/pink shirt.jpg">
-      <img class="images" src="../assets/bottom/red skirt.jpg">
-    </div>
+  <!-- Display search result -->
+  <h2 id="search-msg">{{ msg }}</h2>
 
+  <!-- Display drop down box -->
+  <label for="category-filter">Filter for a category</label>
+  <mat-form-field appearance="fill" id="category-filter">
+    <mat-label>Category</mat-label>
+    <mat-select
+      [(ngModel)]="wearableCategory"
+      (ngModelChange)="modelChangeFn($event)"
+      name="wearableCategory"
+      (selectionChange)="filterCat(wearableCategory)"
+    >
+      <mat-option *ngFor="let wearable of wearableOptions" [value]="wearable">
+        {{ wearable }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <h2 id="filter-msg">{{ msg_fil }}</h2>
+
+  <div *ngIf="isTop; then topBlock"></div>
+  <div *ngIf="isBottom; then bottomBlock"></div>
+  <div *ngIf="isHat; then hatBlock"></div>
+  <div *ngIf="isAccessory; then accessoryBlock"></div>
+  <div *ngIf="isShoes; then shoesBlock"></div>
+  <div *ngIf="isSocks; then socksBlock"></div>
+
+  <!-- Display all images -->
+  <ng-template #topBlock>
     <h2>Top</h2>
-    <div>
-        <img class="images" src="../assets/top/black crop top.jpg">
-        <img class="images" src="../assets/top/black shirt.png">
-        <img class="images" src="../assets/top/checked shirt.jpg">
-        <img class="images" src="../assets/top/pink shirt.jpg">  
+    <div id="top-section">
+      <img class="images" src="../assets/top/black crop top.jpg" />
+      <img class="images" src="../assets/top/black shirt.png" />
+      <img class="images" src="../assets/top/checked shirt.jpg" />
+      <img class="images" src="../assets/top/pink shirt.jpg" />
     </div>
+  </ng-template>
 
+  <ng-template #bottomBlock>
+    <h2>Bottom</h2>
+    <div id="bottom-section">
+      <img class="images" src="../assets/bottom/jeans shorts.jpg" />
+      <img class="images" src="../assets/bottom/jeans.jpg" />
+      <img class="images" src="../assets/bottom/pink shirt.jpg" />
+      <img class="images" src="../assets/bottom/red skirt.jpg" />
+    </div>
+  </ng-template>
+
+  <ng-template #hatBlock>
     <h2>Hat</h2>
-    <div>
-        <img class="images" src="../assets/hat/floral hat.jpg">
+    <div id="hat-section">
+      <img class="images" src="../assets/hat/floral hat.jpg" />
     </div>
-  
-    <h2>Accessory</h2>
-    <div>
-        <img class="images" src="../assets/accessory/diamond necklace.png">
-        <img class="images" src="../assets/accessory/gold necklace.png">
-        <img class="images" src="../assets/accessory/heart necklace.png">
-        <img class="images" src="../assets/accessory/heart ring.jpg">
-        <img class="images" src="../assets/accessory/ring.jpg">
-        <img class="images" src="../assets/accessory/watch.jpg">
-    </div>
-    
-    <h2>Shoes</h2>
-    <div>
-        <img class="images" src="../assets/shoes/adidas slides.jpg">
-        <img class="images" src="../assets/shoes/adidas.png">
-        <img class="images" src="../assets/shoes/black heels.jpg">
-        <img class="images" src="../assets/shoes/red converse.jpg">
-        <img class="images" src="../assets/shoes/slipper.jpg">
-    </div>
-    
-    <h2>Socks</h2>
-    <div>
-        <img class="images" src="../assets/socks/black socks.jpg">
-        <img class="images" src="../assets/socks/colorful socks.jpg">
-        <img class="images" src="../assets/socks/pink socks.jpg">
-        <img class="images" src="../assets/socks/socks.jpg">
-    </div>
-  
-  </main>
+  </ng-template>
+
+  <ng-template #accessoryBlock>
+  <h2>Accessory</h2>
+  <div id="accessory-section">
+    <img class="images" src="../assets/accessory/diamond necklace.png" />
+    <img class="images" src="../assets/accessory/gold necklace.png" />
+    <img class="images" src="../assets/accessory/heart necklace.png" />
+    <img class="images" src="../assets/accessory/heart ring.jpg" />
+    <img class="images" src="../assets/accessory/ring.jpg" />
+    <img class="images" src="../assets/accessory/watch.jpg" />
+  </div>
+</ng-template>
+
+<ng-template #shoesBlock>
+  <h2>Shoes</h2>
+  <div id="shoes-section">
+    <img class="images" src="../assets/shoes/adidas slides.jpg" />
+    <img class="images" src="../assets/shoes/adidas.png" />
+    <img class="images" src="../assets/shoes/black heels.jpg" />
+    <img class="images" src="../assets/shoes/red converse.jpg" />
+    <img class="images" src="../assets/shoes/slipper.jpg" />
+  </div>
+</ng-template>
+
+<ng-template #socksBlock>
+  <h2>Socks</h2>
+  <div id="socks-section">
+    <img class="images" src="../assets/socks/black socks.jpg" />
+    <img class="images" src="../assets/socks/colorful socks.jpg" />
+    <img class="images" src="../assets/socks/pink socks.jpg" />
+    <img class="images" src="../assets/socks/socks.jpg" />
+  </div>
+</ng-template>
+</main>

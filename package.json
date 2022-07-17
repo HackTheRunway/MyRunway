@@ -6,7 +6,9 @@
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "predeploy": "ng build angular-pwa --configuration=production",
+    "deploy": "npx gh-pages -d dist/angular-pwa"
   },
   "private": true,
   "dependencies": {
