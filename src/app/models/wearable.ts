@@ -1,4 +1,4 @@
-import WearableCategory from "./wearable-category";
+import {WearableCategory} from "./wearable-category";
 
 class Wearable {
   constructor(
@@ -29,6 +29,10 @@ class Wearable {
 
     public static toJsonArray(wearables: Wearable[]): any[] {
         return wearables.map(w => w.toJson());
+    }
+
+    public saveWearable() {
+
     }
 
     

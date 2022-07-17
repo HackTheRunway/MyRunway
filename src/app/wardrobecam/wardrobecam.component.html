@@ -1,76 +1,102 @@
-<div id="main-container">
+<div id="main-container" >
   <h1>Add Wearable</h1>
   <p>Center your wearable and snap a photo!</p>
-
-  <div class="wardrobecam">
-    <div id="wardrobecam-container">
-      <div id="wardrobecam-preview">
-        <div
-          id="wardrobecam-image-display"
-          *ngIf="isPhotoTaken; then staticPhotoBlock; else liveCamBlock"
-        ></div>
-        <ng-template #liveCamBlock>
-          <div id="wardrobecam-live-image">
-            <webcam
-              [height]="500"
-              [width]="500"
-              [trigger]="triggerObservable"
-              (imageCapture)="handleImage($event)"
-              *ngIf="showWebcam"
-              [allowCameraSwitch]="allowCameraSwitch"
-              [switchCamera]="nextWebcamObservable"
-              [videoOptions]="videoOptions"
-              [imageQuality]="1"
-              (cameraSwitched)="cameraWasSwitched($event)"
-              (initError)="handleInitError($event)"
-            ></webcam>
-          </div>
-        </ng-template>
-        <ng-template #staticPhotoBlock>
-          <div id="wardrobecam-preview-image">
-            <div class="snapshot" *ngIf="webcamImage">
-              <img [src]="webcamImage.imageAsDataUrl" />
+  <div class="contents-container">
+    <div class="wardrobecam">
+      <div id="wardrobecam-container">
+          <div
+            id="wardrobecam-image-display"
+            *ngIf="isPhotoTaken; then staticPhotoBlock; else liveCamBlock"
+          ></div>
+          <ng-template #liveCamBlock>
+            <div id="wardrobecam-live-image">
+              <webcam
+                [trigger]="triggerObservable"
+                (imageCapture)="handleImage($event)"
+                *ngIf="showWebcam"
+                [allowCameraSwitch]="allowCameraSwitch"
+                [switchCamera]="nextWebcamObservable"
+                [videoOptions]="videoOptions"
+                [imageQuality]="1"
+                (cameraSwitched)="cameraWasSwitched($event)"
+                (initError)="handleInitError($event)"
+              ></webcam>
             </div>
-          </div>
-        </ng-template>
+          </ng-template>
+          <ng-template #staticPhotoBlock>
+            <div id="wardrobecam-preview-image">
+              <div class="snapshot" *ngIf="webcamImage">
+                <img  [src]="webcamImage.imageAsDataUrl" />
+              </div>
+            </div>
+          </ng-template>
+      </div>
+      <div id="wardrobecam-controls">
+        <button
+          id="wardrobecam-snap"
+          class="actionBtn"
+          (click)="triggerSnapshot()"
+        >
+          {{ SnapshotButtonText }}
+        </button>
+
+        <button id="wardrobecam-cancel" [routerLink]="['/']">Cancel</button>
       </div>
     </div>
-    <div id="wardrobecam-controls">
-      <button
-        id="wardrobecam-snap"
-        class="actionBtn"
-        (click)="triggerSnapshot()"
-      >
-        {{ SnapshotButtonText }}
-      </button>
 
-      <button id="wardrobecam-cancel" [routerLink]="['/']">Cancel</button>
+    <div class="controls">
+      <h4>Add Item Details</h4>
+      <form class="add-wearable-form">
+        <mat-form-field class="example-full-width" appearance="fill">
+          <mat-label>Wearable title</mat-label>
+          <input
+            type="text"
+            [(ngModel)]="wearableTitle"
+            name="wearableTitle"
+            (ngModelChange)="modelChangeFn($event)"
+            matInput
+            placeholder="Eg. White Blouse"
+          />
+        </mat-form-field>
+
+        <br />
+
+        <mat-form-field appearance="fill">
+          <mat-label>Category</mat-label>
+          <mat-select
+            [(ngModel)]="wearableCategory"
+            (ngModelChange)="modelChangeFn($event)"
+            name="wearableCategory"
+          >
+            <mat-option
+              *ngFor="let wearable of wearableOptions"
+              [value]="wearable"
+            >
+              {{ wearable }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </form>
+
+      <button
+        id="save"
+        class="actionBtn"
+        (click)="saveWearable()"
+        [disabled]="! isFieldsValidated"
+      >
+        Save
+      </button>
     </div>
   </div>
 </div>
 
-<h4 *ngIf="errors.length > 0">Messages:</h4>
-<ul *ngFor="let error of errors">
-  <li>{{ error | json }}</li>
-</ul>
+<div class="test-output">
+  <h4>Test Output</h4>
+  <div id="test-output-container">
+    <div id="test-output-image">
+      <img id="outputImage" [src]="webcamImage?.imageAsDataUrl" />
+    </div>
+    
+  </div>
 
-<h4>Add Item</h4>
-<form class="example-form">
-  <mat-form-field appearance="fill">
-    <mat-label>Category</mat-label>
-    <mat-select>
-      <mat-option *ngFor="let wearable of wearableOptions" [value]="wearable">
-        {{ wearable }}
-      </mat-option>
-    </mat-select>
-  </mat-form-field>
-
-  <mat-form-field class="example-full-width" appearance="fill">
-    <mat-label>Wearable title</mat-label>
-    <input matInput placeholder="Eg. White Blouse" />
-  </mat-form-field>
-</form>
-
-<button id="save" class="actionBtn"
-(click)="saveWearable()" [disabled]="fieldsValidated">Save</button>
->Save</button>
+</div>

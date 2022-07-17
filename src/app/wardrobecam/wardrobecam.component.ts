@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import {Subject, Observable} from 'rxjs';
+import {Subject, Observable, map} from 'rxjs';
 import {WebcamImage, WebcamInitError, WebcamUtil} from 'ngx-webcam';
 import { WearableCategory } from '../models/wearable-category';
-
+import Wearable from '../models/wearable';
+import { JSONSchema, StorageMap } from '@ngx-pwa/local-storage';
+import { DataStorageService } from '../data-storage.service';
 
 @Component({
   selector: 'app-wardrobecam',
@@ -14,11 +16,14 @@ export class WardrobecamComponent implements OnInit {
 
   // manage page state
   public isPhotoTaken = false;
-  public photoTitle = "default-title";
-  public photoCategory = "";
-  
-  fieldsValidated(): boolean {
-    return this.photoTitle.length > 0 && this.photoCategory.length > 0 && this.isPhotoTaken;
+  public wearableTitle = "";
+  public wearableCategory = "";
+  public isFieldsValidated = false;
+  wearables: Wearable[];
+  service: DataStorageService;
+
+  private fieldsValidated(): boolean {
+    return this.wearableTitle.length > 0 && this.wearableCategory.length > 0 && this.isPhotoTaken;
   }
 
   public SnapshotButtonText = "Snap"
@@ -42,6 +47,11 @@ export class WardrobecamComponent implements OnInit {
   // switch to next / previous / specific webcam; true/false: forward/backwards, string: deviceId
   private nextWebcam: Subject<boolean|string> = new Subject<boolean|string>();
 
+  constructor(service: DataStorageService) { 
+    this.service = service;
+    this.wearables = service.getWearables();
+  }
+  
   public ngOnInit(): void {
     WebcamUtil.getAvailableVideoInputs()
       .then((mediaDevices: MediaDeviceInfo[]) => {
@@ -90,8 +100,33 @@ export class WardrobecamComponent implements OnInit {
     return this.nextWebcam.asObservable();
   }
 
-  saveWearable() {
-    console.log(this.photoTitle);
-    console.log(this.photoCategory);
+  getKeyName(value: string) {
+    return Object.entries(WearableCategory).find(([key, val]) => val === value)?.[0];
   }
+  
+  modelChangeFn(value: any) {
+    this.isFieldsValidated= this.fieldsValidated();
+  }
+
+  saveWearable() {
+    if (this.webcamImage && this.wearableCategory && this.wearableTitle) {
+      var newWearable = new Wearable(this.wearableTitle, <WearableCategory>this.getKeyName(this.wearableCategory), this.webcamImage.imageAsBase64)
+
+      this.wearables.push(newWearable);
+      this.service.setWearables(this.wearables);
+
+      this.isFieldsValidated = false;
+      this.wearableTitle = "";
+      this.wearableCategory = "";
+      this.webcamImage = undefined;
+      this.isPhotoTaken = false;
+      this.SnapshotButtonText = "Snap";
+      this.showWebcam = true;
+
+      var image = new Image();
+      image.src = newWearable.image
+      document.body.appendChild(image);
+    }
+  }
+
 }
