@@ -35,7 +35,6 @@ export class ViewWardrobeComponent implements OnInit {
 
   constructor(service: DataStorageService) { 
     this.service = service;
-    // this.wearables = service.getWearables();
     service.getWearablesAsync().then((wearables) => {
       this.wearables = wearables;
     });
