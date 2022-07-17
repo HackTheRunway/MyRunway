@@ -6,6 +6,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./match.component.scss']
 })
 export class MatchComponent implements OnInit {
+  wearables: string[] = [
+    'Hats', 'Tops', 'Bottoms', 'Shoes', 'Accessories'
+  ];
 
   constructor() { }
 

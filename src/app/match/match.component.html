@@ -1,15 +1,50 @@
 <mat-sidenav-container mode="over" class="example-container">
-  <mat-sidenav #side mode="side">
+  <mat-sidenav #side mode="over">
+    <mat-form-field appearance="fill">
+      <mat-label>Filter</mat-label>
+      <mat-select>
+        <mat-option>All</mat-option>
+        <mat-option *ngFor="let wearable of wearables" [value]="wearable">{{
+          wearable
+        }}</mat-option>
+      </mat-select>
+    </mat-form-field>
     <mat-nav-list>
       <mat-list-item>Test</mat-list-item>
       <mat-list-item>Test</mat-list-item>
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
-    <button type="button" mat-button color="primary" (click)="side.toggle()">
+    <button
+      class="tab"
+      type="button"
+      mat-button
+      color="primary"
+      (click)="side.toggle()"
+    >
       <mat-icon>
-        <span class="material-symbols-outlined"> checkroom </span></mat-icon
-      >
+        <span class="material-symbols-outlined"> checkroom </span>
+      </mat-icon>
     </button>
+    <div class="column">
+      <div class="wearable-grid-item small">
+        <img src="../../assets/images/hat-icon.png" alt="Hat" />
+      </div>
+      <div class="wearable-grid-item large">
+        <img src="../../assets/images/top-icon.jpg" alt="Top" />
+      </div>
+      <div class="wearable-grid-item large">
+        <img src="../../assets/images/bottom-icon.png" alt="Bottom" />
+      </div>
+      <div class="wearable-grid-item small">
+        <img src="../../assets/images/shoes-icon.png" alt="Shoes" />
+      </div>
+    </div>
+    <div class="column">
+      <div class="wearable-grid-item small">
+        <img src="../../assets/images/accessories-icon.png" alt="Accessories" />
+      </div>
+      <span class="spacer"></span> 
+    </div>
   </mat-sidenav-content>
 </mat-sidenav-container>
