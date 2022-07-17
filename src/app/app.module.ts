@@ -7,7 +7,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatListModule } from '@angular/material/list';
 import { MatIconModule } from '@angular/material/icon';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatSelectModule } from '@angular/material/select';
 import { MatGridListModule } from '@angular/material/grid-list';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -16,6 +15,10 @@ import { HomepageComponent } from './homepage/homepage.component';
 import { WardrobecamComponent } from './wardrobecam/wardrobecam.component';
 import { MatchComponent } from './match/match.component';
 
+import { MatInputModule } from '@angular/material/input';
+import { MatOptionModule } from '@angular/material/core';
+import { MatSelectModule } from '@angular/material/select';
+import { DataStorageService } from './data-storage.service';
 
 @NgModule({
   declarations: [
@@ -35,11 +38,12 @@ import { MatchComponent } from './match/match.component';
     MatIconModule,
     MatFormFieldModule,
     MatSelectModule,
-    MatGridListModule
+    MatGridListModule,
+    MatInputModule,
+    MatOptionModule,
+    MatSelectModule,
   ],
-  providers: [],
-  bootstrap: [AppComponent]
+  providers: [DataStorageService],
+  bootstrap: [AppComponent],
 })
-
-export class AppModule { 
-}
+export class AppModule {}
