@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { JSONSchema, StorageMap } from '@ngx-pwa/local-storage';
+import { StorageMap } from '@ngx-pwa/local-storage';
 import Wearable from './models/wearable';
 
 @Injectable({
@@ -17,6 +17,17 @@ export class DataStorageService {
         /* Called if data is valid or `undefined` */
         this.wearableArrString = <string>wearables;
         console.log('wearablesStrInit: ' + this.wearableArrString);
+
+        if (this.wearableArrString == null) { 
+          this.storage.set('wearables', "").subscribe({
+            next: () => {
+              /* Called if data is valid or `undefined` */
+              console.log('wearablesStr instantiated');
+            }
+          });
+
+        }
+
       },
       error: (error) => {
         /* Called if data is invalid */
@@ -27,64 +38,151 @@ export class DataStorageService {
     this.storage.get('numWearables', { type: 'number' }).subscribe({
       next: (numWearables) => {
         /* Called if data is valid or `undefined` */
-        console.log('numWearables: ' + numWearables);
+        console.log('numWearables read: ' + numWearables);
+
+        if (numWearables == null) {
+          this.storage.set('numWearables', <number>0).subscribe({
+            next: () => {
+              /* Called if data is valid or `undefined` */
+              console.log('numWearables success: ' + numWearables);
+            },
+            error: (error) => {
+      
+              console.log('error getting: ' + error);
+            }
+          });
+        }
       },
       error: (error) => {
         /* Called if data is invalid */
         console.log('error getting: ' + error);
       }
     });
+
+
+    this.storage.get('wearables', { type: 'string' }).subscribe({
+      next: (wearables) => {
+        this.wearableArrString = <string>wearables;
+        console.log('wearablesStrInitsecondread: ' + this.wearableArrString);
+      },
+      error: (error) => {
+        console.log('error getting: ' + error);
+      },
+    });
+
+    this.storage.get('numWearables', { type: 'number' }).subscribe({
+      next: (numWearables) => {
+        console.log('numWearables secondread: ' + numWearables);
+      },
+      error: (error) => {
+        console.log('error getting: ' + error);
+      }
+    });
+
   }
 
-  getWearables(): Wearable[] {
-    this.storage.get('wearables', { type: 'string' }).subscribe({
+  // getWearables(): Wearable[] {
+  //   this.wearableArr = new Array<Wearable>();
+
+  //   this.storage.get('wearables', { type: 'string' }).subscribe({
+  //     next: (wearables) => {
+  //       /* Called if data is valid or `undefined` */
+  //       this.wearableArrString = <string>wearables;
+  //       // console.log('wearablesStr: ' + this.wearableArrString);
+
+  //       if (this.wearableArrString) {
+  //         JSON.parse(this.wearableArrString).forEach((element: Wearable) => {
+  //           this.wearableArr.push(element);
+  //           console.log(element.title)
+  //         });
+  //       }
+
+        
+  //     },
+  //     error: (error) => {
+  //       /* Called if data is invalid */
+  //       console.log('error getting: ' + error);
+  //     },
+      
+  //   });
+
+  //   console.log(this.wearableArr);
+  //   return this.wearableArr;  
+
+    
+  // }
+
+  async getWearablesAsync(): Promise<Wearable[]> {
+    this.wearableArr = new Array<Wearable>();
+
+    await this.storage.get('wearables', { type: 'string' }).subscribe({
       next: (wearables) => {
         /* Called if data is valid or `undefined` */
         this.wearableArrString = <string>wearables;
-        console.log('wearablesStr: ' + this.wearableArrString);
+        // console.log('wearablesStr: ' + this.wearableArrString);
+
+        if (this.wearableArrString) {
+          JSON.parse(this.wearableArrString).forEach((element: Wearable) => {
+            this.wearableArr.push(element);
+            console.log(element.title)
+          });
+        }
+        
       },
       error: (error) => {
         /* Called if data is invalid */
         console.log('error getting: ' + error);
       },
+      
     });
 
-    if (this.wearableArrString) {
-      JSON.parse(this.wearableArrString).forEach((element: Wearable) => {
-        this.wearableArr.push(element);
-      });
-    }
-
-    console.log('wearables: ' + this.wearableArr);
-
+    console.log(this.wearableArr);
     return this.wearableArr;
+    
   }
 
-  getNumWearables(): number {
-    this.storage.get('numWearables', { type: 'number' }).subscribe({
-      next: (numWearables) => {
-        /* Called if data is valid or `undefined` */
-        console.log('numWearables: ' + numWearables);
-        this.numWearables = <number>numWearables;
-      },
-      error: (error) => {
-        /* Called if data is invalid */
-        console.log('error getting: ' + error);
-      }
-    });
+  // getNumWearables(): number {
+  //   this.storage.get('numWearables', { type: 'number' }).subscribe({
+  //     next: (numWearables) => {
+  //       /* Called if data is valid or `undefined` */
+  //       console.log('numWearables: ' + numWearables);
+  //       this.numWearables = <number>numWearables;
+  //     },
+  //     error: (error) => {
+  //       /* Called if data is invalid */
+  //       console.log('error getting: ' + error);
+  //     }
+  //   });
 
-    return this.numWearables;
-  }
+  //   return this.numWearables;
+  // }
+
+  // async getNumWearablesAsync(): Promise<number> {
+  //   await this.storage.get('numWearables', { type: 'number' }).subscribe({
+  //     next: (numWearables) => {
+  //       /* Called if data is valid or `undefined` */
+  //       console.log('numWearables: ' + numWearables);
+  //       this.numWearables = <number>numWearables;
+  //     },
+  //     error: (error) => {
+  //       /* Called if data is invalid */
+  //       console.log('error getting: ' + error);
+  //     }
+  //   });
+
+  //   return this.numWearables;
+  // }
 
 
-  setWearables(wearables: Wearable[], numWearables: number) {
+  async setWearables(wearables: Wearable[], numWearables: number) {
     this.wearableArr = wearables;
+
     this.wearableArrString = JSON.stringify(this.wearableArr);
-    console.log('wearablesStr2: ' + this.wearableArrString);
+
     this.storage.set('wearables', this.wearableArrString).subscribe({
       next: () => {
         /* Called if data is valid or `undefined` */
-        console.log('wearablesStr success: ' + this.wearableArrString);
+        // console.log('wearablesStr success: ' + this.wearableArrString);
       },
       error: (error) => {
         /* Called if data is invalid */
