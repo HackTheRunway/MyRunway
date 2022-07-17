@@ -24,20 +24,6 @@ export class DataStorageService {
       },
     });
 
-    // if (this.wearableArrString.length > 0) {
-    //   JSON.parse(this.wearableArrString).forEach((element: Wearable) => {
-    //     this.wearableArr.push(element);
-    //   });
-    // } else {
-    //   console.log('init wearables');
-    //   this.storage.set('wearables', this.wearableArrString).subscribe({
-    //     next: () => {},
-    //     error: (error) => {
-    //       console.log('error setting: ' + error);
-    //     },
-    //   });
-    // }
-
     this.storage.get('numWearables', { type: 'number' }).subscribe({
       next: (numWearables) => {
         /* Called if data is valid or `undefined` */
@@ -48,21 +34,6 @@ export class DataStorageService {
         console.log('error getting: ' + error);
       }
     });
-
-    // if (! this.numWearables ) {
-    //   console.log("init numWearables");
-
-    //   this.storage.set('numWearables', 0).subscribe({
-    //     next: () => {
-    //       /* Called if data is valid or `undefined` */
-    //       console.log('numWearables reset');
-    //     },
-    //     error: (error) => {
-    //       /* Called if data is invalid */
-    //       console.log('error: ' + error);
-    //     }
-    //   });
-    // }
   }
 
   getWearables(): Wearable[] {
