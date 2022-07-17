@@ -21,6 +21,7 @@ export class WardrobecamComponent implements OnInit {
   public isFieldsValidated = false;
   wearables: Wearable[];
   service: DataStorageService;
+  numWearables: number = 0;
 
   private fieldsValidated(): boolean {
     return this.wearableTitle.length > 0 && this.wearableCategory.length > 0 && this.isPhotoTaken;
@@ -109,11 +110,15 @@ export class WardrobecamComponent implements OnInit {
   }
 
   saveWearable() {
+    this.numWearables = this.service.getNumWearables() + 1
+
     if (this.webcamImage && this.wearableCategory && this.wearableTitle) {
-      var newWearable = new Wearable(this.wearableTitle, <WearableCategory>this.getKeyName(this.wearableCategory), this.webcamImage.imageAsBase64)
+      var newWearable = new Wearable(this.numWearables, this.wearableTitle, <WearableCategory>this.getKeyName(this.wearableCategory), this.webcamImage.imageAsBase64)
 
       this.wearables.push(newWearable);
-      this.service.setWearables(this.wearables);
+      this.service.setWearables(this.wearables, this.numWearables);
+
+      console.log(this.wearables)
 
       this.isFieldsValidated = false;
       this.wearableTitle = "";
@@ -123,10 +128,14 @@ export class WardrobecamComponent implements OnInit {
       this.SnapshotButtonText = "Snap";
       this.showWebcam = true;
 
-      var image = new Image();
-      image.src = newWearable.image
-      document.body.appendChild(image);
+      // var image = new Image();
+      // image.src = "data:image/png;base64," + newWearable.image.toString();
+      // document.body.appendChild(image);
     }
+  }
+
+  public getWearableBtn() {
+   console.log( this.service.getWearables())
   }
 
 }

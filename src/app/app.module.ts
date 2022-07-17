@@ -12,6 +12,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatInputModule } from '@angular/material/input';
 import { MatOptionModule } from '@angular/material/core';
 import { MatSelectModule } from '@angular/material/select';
+import { DataStorageService } from './data-storage.service';
 
 @NgModule({
   declarations: [AppComponent, HomepageComponent, WardrobecamComponent],
@@ -25,7 +26,7 @@ import { MatSelectModule } from '@angular/material/select';
     MatOptionModule,
     MatSelectModule,
   ],
-  providers: [],
+  providers: [DataStorageService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
