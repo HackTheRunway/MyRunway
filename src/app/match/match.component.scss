@@ -10,7 +10,25 @@ mat-sidenav-container {
 }
 
 mat-sidenav {
-    width: 20vw;
+    width: 50vw;
+}
+
+mat-form-field{
+    width: 100%;
+}
+
+mat-grid-list {
+    width: 100%;
+    display: flex;
+    align-content: center;
+    justify-content: center;
+}
+mat-list-item {
+    img {
+        max-width: 33%;
+        height: auto;
+        margin: 1%;
+    }
 }
 
 mat-icon {
@@ -75,7 +93,7 @@ mat-sidenav-content {
 
 .wearable-grid-item {
     padding: 20px;
-    max-height: 20vh;
+    max-height: 15vh;
     margin: 2vh;
     display: flex;
     flex-direction: column;
@@ -84,6 +102,7 @@ mat-sidenav-content {
 
     img {
         object-fit: contain;
+        cursor: pointer;
     }
 }
 
