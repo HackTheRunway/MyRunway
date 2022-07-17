@@ -24,6 +24,14 @@ export class ViewWardrobeComponent implements OnInit {
 
   msg:string = '';
   msg_fil:string = '';
+  curCat:string = '';
+
+  isTop: boolean = true;
+  isBottom: boolean = true;
+  isHat: boolean = true;
+  isShoes: boolean = true;
+  isSocks: boolean = true;
+  isAccessory: boolean = true;
 
   constructor(service: DataStorageService) { 
     this.service = service;
@@ -37,7 +45,7 @@ export class ViewWardrobeComponent implements OnInit {
   }
 
   private fieldsValidated(): boolean {
-
+ 
       return this.wearableTitle.length > 0 && this.wearableCategory.length > 0;
   }
 
@@ -60,21 +68,27 @@ export class ViewWardrobeComponent implements OnInit {
     switch(message) {
       case "top":
         this.msg = "The category selected is Top.";
+        this.curCat = "Top";
         break;
       case "bottom":
         this.msg = "The category selected is Bottom.";
+        this.curCat = "Bottom";
         break;
       case "accessory":
         this.msg = "The category selected is Accessory.";
+        this.curCat = "Accessory";
         break;
       case "hat":
         this.msg = "The category selected is Hat.";
+        this.curCat = "Hat";
         break;
       case "shoes":
         this.msg = "The category selected is Shoes.";
+        this.curCat = "Shoes";
         break;
       case "socks":
         this.msg = "The category selected is Socks.";
+        this.curCat = "Socks";
         break;
       default:
         this.msg = "Sorry I do not know this category. Please select from the following available categories: 1.Top 2.Bottom 3.Accessory 4.Hat 5.Shoes 6.Socks"
@@ -95,21 +109,27 @@ export class ViewWardrobeComponent implements OnInit {
     switch(message) {
       case "top":
         this.msg_fil = "The category selected is Top.";
+        this.curCat = "Top";
         break;
       case "bottom":
         this.msg_fil = "The category selected is Bottom.";
+        this.curCat = "Bottom";
         break;
       case "accessory":
         this.msg_fil = "The category selected is Accessory.";
+        this.curCat = "Accessory";
         break;
       case "hat":
         this.msg_fil = "The category selected is Hat.";
+        this.curCat = "Hat";
         break;
       case "shoes":
         this.msg_fil = "The category selected is Shoes.";
+        this.curCat = "Shoes";
         break;
       case "socks":
         this.msg_fil = "The category selected is Socks.";
+        this.curCat = "Socks";
         break;
     }
 
