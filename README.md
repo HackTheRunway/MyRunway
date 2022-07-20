@@ -1,5 +1,5 @@
 # MyRunway
-A PWA personal closet manager hosted with Github!
+A PWA personal closet manager for your fashionista needs
 
 # How to run?
 1. Clone this repo.
